@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: ea64014020b0843068e2af35c56d1b08
+timeCreated: 1512483202
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Adamina
+  fontNames:
+  - Adamina
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
