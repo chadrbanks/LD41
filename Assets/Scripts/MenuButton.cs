@@ -12,7 +12,7 @@ public enum MenuButtonType
 
 public class MenuButton : MonoBehaviour
 {
-	public MenuEngine engn;
+	public MainEngine engn;
 	public MenuButtonType bt;
 
 	[SerializeField] private Material m_NormalMaterial;
@@ -58,11 +58,11 @@ public class MenuButton : MonoBehaviour
 		}
 		else if (bt == MenuButtonType.Credits)
 		{
-			engn.ToggleCredits (false);
+			//engn.ToggleCredits (false);
 		}
 		else if (bt == MenuButtonType.Back)
 		{
-			engn.ToggleCredits (true);
+			//engn.ToggleCredits (true);
 		}
 		else if (bt == MenuButtonType.Quit)
 		{
