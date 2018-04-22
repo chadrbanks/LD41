@@ -7,9 +7,8 @@ public class GameEngine : MonoBehaviour
 {
 	public bool GameOver = false;
 	public Coin c;
-	float StepTime = 0, MoveSpeed = 1.5f;
 	Dictionary <int, Coin> coins = new Dictionary<int, Coin>();
-
+    public int cash;
 	public FloatText ft;
 	//public TextMesh got, next, CashText, CostText, CostText2;
 
@@ -17,370 +16,37 @@ public class GameEngine : MonoBehaviour
 
 	void Start ()
 	{
-		//cash = 1000;
-		//reward = 9;
-		//NextShape = Random.Range (1, 8);
-		//NextAd = Random.Range( NextAdMin, NextAdMax );
-		/*
-		foreach (TetButton btn in btns)
-		{
-			btn.SetEngine (this);
-		}
-		*/
-	}
-	/*
-	void SpawnCube( )
-	{
-		if (cubes [219].GetMat () == 0 && cubes [218].GetMat () == 0 && cubes [217].GetMat () == 0 && cubes [216].GetMat () == 0)
-		{
-			CurrShape = NextShape;
-			NextShape = Random.Range (1, 8);
-			int m = Random.Range (1, 12);
-			pos = 1;
+        cash = 1000;
+        /*
+        Vector3 v = new Vector3 (x, 0, 10);
+        FloatText g = Instantiate(ft, v, Quaternion.identity) as FloatText;
+        g.SetText( "+ $" + reward );
+        g.SetColor( Color.green );
+        */
 
-			switch (CurrShape)
-			{
-			case 1: // Bar
-				cubes [216].SetMat (m);
-				cubes [215].SetMat (m);
-				cubes [214].SetMat (m);
-				cubes [213].SetMat (m);
-				cubes [216].falling = true;
-				cubes [215].falling = true;
-				cubes [214].falling = true;
-				cubes [213].falling = true;
-				cubes [214].pivot = true;
-				break;
-			case 2: // J
-				cubes [215].SetMat (m);
-				cubes [205].SetMat (m);
-				cubes [195].SetMat (m);
-				cubes [194].SetMat (m);
-				cubes [215].falling = true;
-				cubes [205].falling = true;
-				cubes [195].falling = true;
-				cubes [194].falling = true;
-				cubes [195].pivot = true;
-				break;
-			case 3: // L
-				cubes [214].SetMat (m);
-				cubes [204].SetMat (m);
-				cubes [194].SetMat (m);
-				cubes [195].SetMat (m);
-				cubes [214].falling = true;
-				cubes [204].falling = true;
-				cubes [194].falling = true;
-				cubes [195].falling = true;
-				cubes [194].pivot = true;
-				break;
-			case 4: // Box
-				cubes [215].SetMat (m);
-				cubes [205].SetMat (m);
-				cubes [214].SetMat (m);
-				cubes [204].SetMat (m);
-				cubes [215].falling = true;
-				cubes [205].falling = true;
-				cubes [214].falling = true;
-				cubes [204].falling = true;
-				cubes [214].pivot = true;
-				break;
-			case 5: // S
-				cubes [216].SetMat (m);
-				cubes [205].SetMat (m);
-				cubes [215].SetMat (m);
-				cubes [204].SetMat (m);
-				cubes [216].falling = true;
-				cubes [205].falling = true;
-				cubes [215].falling = true;
-				cubes [204].falling = true;
-				cubes [215].pivot = true;
-				break;
-			case 6: // Z
-				cubes [215].SetMat (m);
-				cubes [206].SetMat (m);
-				cubes [214].SetMat (m);
-				cubes [205].SetMat (m);
-				cubes [215].falling = true;
-				cubes [206].falling = true;
-				cubes [214].falling = true;
-				cubes [205].falling = true;
-				cubes [215].pivot = true;
-				break;
-			case 7: // T
-				cubes [216].SetMat (m);
-				cubes [215].SetMat (m);
-				cubes [214].SetMat (m);
-				cubes [205].SetMat (m);
-				cubes [216].falling = true;
-				cubes [215].falling = true;
-				cubes [214].falling = true;
-				cubes [205].falling = true;
-				cubes [215].pivot = true;
-				break;
-			}
+        for (int x = 0; x < 200; x++ )
+        {
+            SpawnSetup( Random.Range(-4, 5), 5, Random.Range(-4, 5));
+        }
+    }
 
-			UpdateNextDisplay ();
-		}
-		else
-		{
-			GameOver = true;
-			got.text = "Game Over!";
-		}
-	}
-	
-	void Move( string dir )
-	{
-		bool WillMove = true;
-		switch (dir)
-		{
-		case "left":
-			for (int x = 0; x < 220; x++)
-			{
-				int d = x - 1;
-				if (cubes [x].falling && (d % 10) == 9 )
-				{
-					WillMove = false;
-				}
-				if (cubes [x].falling && cubes[ d ].falling == false && cubes[ d ].GetMat() != 0 )
-				{
-					WillMove = false;
-				}
-			}
+    void SpawnSetup(int x, int y, int z)
+    {
+        Vector3 nv = new Vector3(x,y,z);
+        Coin b = Instantiate(c, nv, Quaternion.identity) as Coin;
+        b.Waste();
+    }
 
-			if( WillMove )
-			{
-				if (BuyMove (1))
-				{
-					for( int x = 0; x < 220; x++ )
-					{
-						int d = x - 1;
-						if (cubes [x].falling )
-						{
-							SwapTets ( x, d );
-						}
-					}
-				}
-			}
-			break;
-		case "right":
-			for (int x = 0; x < 220; x++)
-			{
-				int d = x + 1;
-				if( d < 220 )
-				{
-					if (cubes [x].falling && (d % 10) == 0 )
-					{
-						WillMove = false;
-					}
-					if (cubes [x].falling && cubes[ d ].falling == false && cubes[ d ].GetMat() != 0 )
-					{
-						WillMove = false;
-					}
-					if (cubes [x].falling && cubes [x].GetTid() >= 210 )
-					{
-						WillMove = false;
-					}
-				}
-			}
+    void SpawnSingle(int x)
+    {
+        Vector3 nv = new Vector3(x, 5, 4);
+        Coin b = Instantiate(c, nv, Quaternion.identity) as Coin;
+        b.Waste();
+    }
 
-			if( WillMove )
-			{
-				if (BuyMove (1))
-				{
-					for( int x = 219; x > 0; x-- )
-					{
-						int d = x + 1;
-						if (d > 219)
-							d -= 10;
-						
-						if (cubes [x].falling )
-						{
-							SwapTets ( x, d );
-						}
-					}
-				}
-			}
-			break;
-		case "down":
-			UpdateCube ();
-			break;
-		case "up":
-			switch (CurrShape)
-			{
-			case 1:
-				// Bar
-				if( pos == 1 )
-				{
-					pos = 2;
-					int x = FindPivot ();
-					SwapTets ( x+2, x+20 );
-					SwapTets ( x+1, x+10 );
-					SwapTets ( x-1, x-10 );
-				}
-				else
-				{
-					pos = 1;
-					int x = FindPivot ();
-					SwapTets ( x+20, x+2 );
-					SwapTets ( x+10, x+1 );
-					SwapTets ( x-10, x-1 );
-				}
-				break;
-			case 2:
-				// J
-				if (pos == 1)
-				{
-					pos = 2;
-					int x = FindPivot ();
-					SwapTets (x + 10, x + 1);
-					SwapTets (x - 1, x + 10);
-					SwapTets (x + 20, x + 2);
-				}
-				else if (pos == 2)
-				{
-					pos = 3;
-					int x = FindPivot ();
-					SwapTets ( x+1, x-10 );
-					SwapTets ( x+10, x+1 );
-					SwapTets ( x+2, x-20 );
-				}
-				else if( pos == 3 )
-				{
-					pos = 4;
-					int x = FindPivot ();
-					SwapTets ( x-10, x-1 );
-					SwapTets ( x+1, x-10 );
-					SwapTets ( x-20, x-2 );
-				}
-				else
-				{
-					pos = 1;
-					int x = FindPivot ();
-					SwapTets ( x-1, x+10 );
-					SwapTets ( x-10, x-1 );
-					SwapTets ( x-2, x+20 );
-				}
-				break;
-			case 3:
-				// L
-				if (pos == 1)
-				{
-					pos = 2;
-					int x = FindPivot ();
-					SwapTets (x + 1, x - 10);
-					SwapTets (x + 10, x + 1);
-					SwapTets (x + 20, x + 2);
-				}
-				else if (pos == 2)
-				{
-					pos = 3;
-					int x = FindPivot ();
-					SwapTets ( x-10, x-1 );
-					SwapTets ( x+1, x-10 );
-					SwapTets ( x+2, x-20 );
-				}
-				else if( pos == 3 )
-				{
-					pos = 4;
-					int x = FindPivot ();
-					SwapTets ( x-1, x+10 );
-					SwapTets ( x-10, x-1 );
-					SwapTets ( x-20, x-2 );
-				}
-				else
-				{
-					pos = 1;
-					int x = FindPivot ();
-					SwapTets ( x+10, x+1 );
-					SwapTets ( x-1, x+10 );
-					SwapTets ( x-2, x+20 );
-				}
-				break;
-			case 4:
-				// Box
-				break;
-			case 5:
-				// S
-				if( pos == 1 )
-				{
-					pos = 2;
-					int x = FindPivot ();
-					SwapTets ( x-11, x+9 );
-					SwapTets ( x-10, x-1 );
-					SwapTets ( x+1, x-10 );
-				}
-				else
-				{
-					pos = 1;
-					int x = FindPivot ();
-					SwapTets ( x-10, x+1 );
-					SwapTets ( x-1, x-10 );
-					SwapTets ( x+9, x-11 );
-				}
-				break;
-			case 6:
-				// Z
-				if( pos == 1 )
-				{
-					pos = 2;
-					int x = FindPivot ();
-					SwapTets ( x-1, x+10 );
-					SwapTets ( x-10, x-1 );
-					SwapTets ( x-9, x-11 );
-				}
-				else
-				{
-					pos = 1;
-					int x = FindPivot ();
-					SwapTets ( x-1, x-10 );
-					SwapTets ( x+10, x-1 );
-					SwapTets ( x-11, x-9 );
-				}
-				break;
-			case 7:
-				// T
-				if (pos == 1)
-				{
-					pos = 2;
-					int x = FindPivot ();
-					SwapTets (x + 1, x + 10);
-				}
-				else if (pos == 2)
-				{
-					pos = 3;
-					int x = FindPivot ();
-					SwapTets ( x-10, x+1 );
-				}
-				else if( pos == 3 )
-				{
-					pos = 4;
-					int x = FindPivot ();
-					SwapTets ( x-1, x-10 );
-				}
-				else
-				{
-					pos = 1;
-					int x = FindPivot ();
-					SwapTets ( x+10, x-1 );
-				}
-				break;
-			}
-			break;
-		}
-	}
-	*/
-
-	/*
-	Vector3 v = new Vector3 (x, 0, 10);
-	FloatText g = Instantiate(ft, v, Quaternion.identity) as FloatText;
-	g.SetText( "+ $" + reward );
-	g.SetColor( Color.green );
-	*/
-
-	int CanMove = 10;
-	bool ShowMainText = true;
 	public bool Paused = false;
-	float fasting = 0;
+    float StepTime = 0, MoveSpeed = 1.5f;
+
 	void Update ()
 	{
 		if( Input.GetKeyDown( KeyCode.P ) && !GameOver )
@@ -393,22 +59,47 @@ public class GameEngine : MonoBehaviour
 				//got.text = "PAUSED!";
 			}
 		}
-		/*
-		if (Input.GetKeyDown (KeyCode.M))
-		{
-			if ( mainsong.isPlaying && !GameOver )
-			{
-				mainsong.Stop ();
-			}
-			else
-			{
-				mainsong.Play ();
-			}
-		}
-		*/
+
+        if (Input.GetKeyDown(KeyCode.Z))
+        {
+            SpawnSingle(-4);
+        }
+        if (Input.GetKeyDown(KeyCode.X))
+        {
+            SpawnSingle(-3);
+        }
+        if (Input.GetKeyDown(KeyCode.C))
+        {
+            SpawnSingle(-2);
+        }
+        if (Input.GetKeyDown(KeyCode.V))
+        {
+            SpawnSingle(-1);
+        }
+        if (Input.GetKeyDown(KeyCode.B))
+        {
+            SpawnSingle(0);
+        }
+        if (Input.GetKeyDown(KeyCode.N))
+        {
+            SpawnSingle(1);
+        }
+        if (Input.GetKeyDown(KeyCode.M))
+        {
+            SpawnSingle(2);
+        }
+        if (Input.GetKeyDown(KeyCode.Comma))
+        {
+            SpawnSingle(3);
+        }
+        if (Input.GetKeyDown(KeyCode.Period))
+        {
+            SpawnSingle(4);
+        }
 
 		if (StepTime >= MoveSpeed)
 		{
+            //SpawnSingle(5);
 			StepTime = 0;
 		}
 		else// if(playing)

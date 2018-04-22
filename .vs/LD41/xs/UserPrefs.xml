@@ -1,0 +1,19 @@
+﻿<Properties StartupConfiguration="{855AD4BC-D690-5F48-1B48-EA6DD5D790C8}|">
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Coin.cs">
+    <Files>
+      <File FileName="Assets/Scripts/MainEngine.cs" Line="24" Column="3" />
+      <File FileName="Assets/Scripts/MenuButton.cs" Line="54" Column="1" />
+      <File FileName="Assets/Scripts/GameEngine.cs" Line="88" Column="15" />
+      <File FileName="Assets/Scripts/Dozer.cs" Line="17" Column="3" />
+      <File FileName="Assets/Scripts/Coin.cs" Line="21" Column="38" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.ItemProperties.LD41 PreferredExecutionTarget="Unity.Editor" />
+</Properties>
