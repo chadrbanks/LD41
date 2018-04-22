@@ -22,6 +22,8 @@ public class Singleton : MonoBehaviour
 	public ReleasePlatform platform;
 	public FloatText gft;
 
+    public int cc = 0;
+
 	void Awake()
 	{
 		if (data == null)

@@ -6,7 +6,8 @@ public class MainEngine : MonoBehaviour
 {
 	public Coin c;
 	public MenuButton b1, b2, b3, back;
-	//public TextMesh creds;
+	public TextMesh ctxt, vtxt;
+    //int coins = 0;
 	//public AudioSource mainsong;
 	//float StepTime = 0;
 
@@ -21,13 +22,21 @@ public class MainEngine : MonoBehaviour
 		SpawnSingle(30);
 		SpawnSingle(30);
 		SpawnSingle(40);
+
+        vtxt.text = "v" + Singleton.data.version;
 	}
+
+    public void ToggleCredits( bool v )
+    {
+        
+    }
 
 	void SpawnSingle(int y)
 	{
 		Vector3 nv = new Vector3(Random.Range(-40, 40), y, 5);
 		Coin b = Instantiate(c, nv, Quaternion.identity) as Coin;
-		b.Waste();
+        b.Waste();
+		//b.LinkM(this);
 	}
 
 	bool falling = true;
@@ -48,6 +57,8 @@ public class MainEngine : MonoBehaviour
 			SpawnSingle(30);
 			SpawnSingle(30);
 		}
+
+        ctxt.text = "Coins: " + Singleton.data.cc;
 		/*
 		if (Input.GetKeyDown(KeyCode.M))
 		{

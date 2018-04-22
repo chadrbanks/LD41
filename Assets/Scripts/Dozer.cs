@@ -18,7 +18,7 @@ public class Dozer : MonoBehaviour
 
         if (transform.position.z < 4)
             back = 1;
-        else if (transform.position.z > 8)
+        else if (transform.position.z > 10)
             back = 0;
 
         if( back == 0 )
