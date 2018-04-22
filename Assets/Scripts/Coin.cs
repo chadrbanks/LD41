@@ -8,9 +8,11 @@ public class Coin : MonoBehaviour
     private bool setsy = false;
     //private MainEngine mainEngine;
     private GameEngine gameEngine;
+    public Material[] mats;
 
 	void Start()
 	{
+        GetComponent<Renderer>().material = mats[ Random.Range( 0, 2 ) ];
         //v = 10;
     }
 
@@ -50,7 +52,7 @@ public class Coin : MonoBehaviour
 	{
 		//transform.Rotate(new Vector3(15, 30, 45) * Time.deltaTime);
 
-		if (gameObject.transform.position.y < -50)
+		if (gameObject.transform.position.y < -12)
 		{
             if( setsy )
                 gameEngine.addCash(v);

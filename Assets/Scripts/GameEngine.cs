@@ -22,7 +22,13 @@ public class GameEngine : MonoBehaviour
         int r = Random.Range(120, 180);
         for (int x = 0; x < r; x++ )
         {
-            SpawnSetup( Random.Range(-4, 5), 0, Random.Range(-4, 3));
+            SpawnSetup( Random.Range(-4, 5), -2, Random.Range(-4, 3));
+        }
+
+        int p = Random.Range(0, 2);
+        if( p == 1 )
+        {
+            SpawnPrizeSetup( Random.Range(1, 10) );
         }
 
         Prize = Random.Range( 5, 90 );
@@ -44,10 +50,19 @@ public class GameEngine : MonoBehaviour
         b.Link(this);
     }
 
-    void SpawnPrize()
+    void SpawnPrize(int type)
     {
         Prize = Random.Range(180, 1200);
         Vector3 nv = new Vector3(Random.Range(-5, 5), 6, 2);
+        Coin b = Instantiate(c, nv, Quaternion.identity) as Coin;
+        b.Link(this);
+        b.SetPrize();
+    }
+
+    void SpawnPrizeSetup(int type)
+    {
+        Prize = Random.Range(180, 1200);
+        Vector3 nv = new Vector3(Random.Range(-5, 5), -1, Random.Range(-2, 5));
         Coin b = Instantiate(c, nv, Quaternion.identity) as Coin;
         b.Link(this);
         b.SetPrize();
@@ -148,7 +163,7 @@ public class GameEngine : MonoBehaviour
             Prize--;
             if( Prize <= 0 )
             {
-                SpawnPrize();
+                SpawnPrize(Random.Range( 1, 10 ));
             }
 		}
 		else// if(playing)

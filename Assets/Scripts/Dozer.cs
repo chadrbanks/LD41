@@ -22,8 +22,8 @@ public class Dozer : MonoBehaviour
             back = 0;
 
         if( back == 0 )
-            transform.Translate(Vector3.back * 1 * Time.deltaTime);
+            transform.Translate(Vector3.back * 2 * Time.deltaTime);
         else
-            transform.Translate(Vector3.back * -1 * Time.deltaTime);
+            transform.Translate(Vector3.back * -2 * Time.deltaTime);
 	}
 }
