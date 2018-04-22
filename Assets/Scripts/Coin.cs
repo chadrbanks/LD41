@@ -55,7 +55,12 @@ public class Coin : MonoBehaviour
 		if (gameObject.transform.position.y < -12)
 		{
             if( setsy )
-                gameEngine.addCash(v);
+            {
+                if (transform.position.z > -5.5)
+                    gameEngine.addCash(v, false);
+                else
+                    gameEngine.addCash(v, true);
+            }
             
 			Destroy(gameObject);
 		}

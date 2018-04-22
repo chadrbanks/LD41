@@ -267,12 +267,94 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 74934847}
   m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -0.056144238, y: 10, z: 0}
+  m_LocalPosition: {x: -0.056144238, y: 10, z: 1}
   m_LocalScale: {x: 15, y: 20, z: 0.10000006}
   m_Children: []
   m_Father: {fileID: 1600672443}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+--- !u!1 &96718577
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 96718578}
+  - component: {fileID: 96718581}
+  - component: {fileID: 96718580}
+  - component: {fileID: 96718579}
+  m_Layer: 0
+  m_Name: WinPanel
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &96718578
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 96718577}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -5, y: -7.22, z: -9.5}
+  m_LocalScale: {x: 15.000008, y: 20, z: 0.10000005}
+  m_Children: []
+  m_Father: {fileID: 1600672443}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!23 &96718579
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 96718577}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_Materials:
+  - {fileID: 2100000, guid: 9f6b86ac8345849a89dbd24037b88e57, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 1
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+--- !u!65 &96718580
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 96718577}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!33 &96718581
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 96718577}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &135808818
 GameObject:
   m_ObjectHideFlags: 0
@@ -395,7 +477,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 474999182}
   m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -10.056145, y: 10, z: 0}
+  m_LocalPosition: {x: -10.056145, y: 10, z: 1}
   m_LocalScale: {x: 15, y: 20, z: 0.10000006}
   m_Children: []
   m_Father: {fileID: 1600672443}
@@ -422,6 +504,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f17a7d7c625c47ffa7f6e1e2a28a812, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  engn: {fileID: 135808820}
 --- !u!54 &730434998
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -622,7 +705,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4103203571895556, guid: a8dd7d629bb91436e9b7df6a421c4201, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 2.0462165
+      value: 17.17
       objectReference: {fileID: 0}
     - target: {fileID: 4103203571895556, guid: a8dd7d629bb91436e9b7df6a421c4201, type: 2}
       propertyPath: m_LocalRotation.x
@@ -643,6 +726,10 @@ Prefab:
     - target: {fileID: 4103203571895556, guid: a8dd7d629bb91436e9b7df6a421c4201, type: 2}
       propertyPath: m_RootOrder
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4103203571895556, guid: a8dd7d629bb91436e9b7df6a421c4201, type: 2}
+      propertyPath: m_LocalScale.z
+      value: 20
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a8dd7d629bb91436e9b7df6a421c4201, type: 2}
@@ -842,6 +929,7 @@ Transform:
   - {fileID: 74934851}
   - {fileID: 1576047200}
   - {fileID: 62631412}
+  - {fileID: 96718578}
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1002,7 +1090,7 @@ GameObject:
   - component: {fileID: 1854018667}
   - component: {fileID: 1854018666}
   m_Layer: 0
-  m_Name: New Text
+  m_Name: DirectionText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1015,9 +1103,11 @@ TextMesh:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1854018665}
-  m_Text: 'Use keys Z through Period to spawn coins.
+  m_Text: 'Use keys Q through O to spawn coins.
 
-    Press Q to cheat!'
+    Press P to toggle pause.
+
+    Press N to go to a new table!'
   m_OffsetZ: 0
   m_CharacterSize: 0.1
   m_LineSpacing: 1

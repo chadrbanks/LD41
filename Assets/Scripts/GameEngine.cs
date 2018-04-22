@@ -19,10 +19,10 @@ public class GameEngine : MonoBehaviour
 	{
         //cash = 10;
 
-        int r = Random.Range(120, 180);
+        int r = Random.Range(150, 650);
         for (int x = 0; x < r; x++ )
         {
-            SpawnSetup( Random.Range(-4, 5), -2, Random.Range(-4, 3));
+            SpawnSetup( Random.Range(-4, 5), -2, Random.Range(-4, 8));
         }
 
         int p = Random.Range(0, 2);
@@ -34,13 +34,23 @@ public class GameEngine : MonoBehaviour
         Prize = Random.Range( 5, 90 );
     }
 
-    public void addCash( int val )
+    public void addCash( int val, bool legit )
     {
-        Vector3 v = new Vector3(-12, 0, 0);
-        FloatText g = Instantiate(ft, v, Quaternion.identity) as FloatText;
-        g.SetText("+" + val + " Coins");
-        g.SetColor(Color.yellow);
-        Singleton.data.cc += val;
+        if( legit )
+        {
+            Vector3 v = new Vector3(-12, 0, 0);
+            FloatText g = Instantiate(ft, v, Quaternion.identity) as FloatText;
+            g.SetText("+" + val + " Coins");
+            g.SetColor(Color.yellow);
+            Singleton.data.cc += val;
+        }
+        else
+        {
+            Vector3 v = new Vector3(-12, 0, 0);
+            FloatText g = Instantiate(ft, v, Quaternion.identity) as FloatText;
+            g.SetText("Coin Lost!");
+            g.SetColor(Color.red);
+        }
     }
 
     void SpawnSetup(int x, int y, int z)
@@ -53,7 +63,7 @@ public class GameEngine : MonoBehaviour
     void SpawnPrize(int type)
     {
         Prize = Random.Range(180, 1200);
-        Vector3 nv = new Vector3(Random.Range(-5, 5), 6, 2);
+        Vector3 nv = new Vector3(Random.Range(-5, 5), 6, 4);
         Coin b = Instantiate(c, nv, Quaternion.identity) as Coin;
         b.Link(this);
         b.SetPrize();
@@ -62,7 +72,7 @@ public class GameEngine : MonoBehaviour
     void SpawnPrizeSetup(int type)
     {
         Prize = Random.Range(180, 1200);
-        Vector3 nv = new Vector3(Random.Range(-5, 5), -1, Random.Range(-2, 5));
+        Vector3 nv = new Vector3(Random.Range(-5, 5), -1, Random.Range(-2, 8));
         Coin b = Instantiate(c, nv, Quaternion.identity) as Coin;
         b.Link(this);
         b.SetPrize();
@@ -70,19 +80,22 @@ public class GameEngine : MonoBehaviour
 
     void SpawnSingle(int x)
     {
-        if (Singleton.data.cc > 0)
+        if (!Paused)
         {
-            Vector3 nv = new Vector3(x, 6, 4);
-            Coin b = Instantiate(c, nv, Quaternion.identity) as Coin;
-            b.Link(this);
-            Singleton.data.cc--;
-        }
-        else
-        {
-            Vector3 v = new Vector3(-12, 0, 0);
-            FloatText g = Instantiate(ft, v, Quaternion.identity) as FloatText;
-            g.SetText("No more coins!");
-            g.SetColor(Color.red);
+            if (Singleton.data.cc > 0)
+            {
+                Vector3 nv = new Vector3(x, 6, 8);
+                Coin b = Instantiate(c, nv, Quaternion.identity) as Coin;
+                b.Link(this);
+                Singleton.data.cc--;
+            }
+            else
+            {
+                Vector3 v = new Vector3(-12, 0, 0);
+                FloatText g = Instantiate(ft, v, Quaternion.identity) as FloatText;
+                g.SetText("No more coins!");
+                g.SetColor(Color.red);
+            }
         }
     }
 
@@ -92,7 +105,7 @@ public class GameEngine : MonoBehaviour
 
 	void Update ()
 	{
-		if( Input.GetKeyDown( KeyCode.P ) && !GameOver )
+		if( Input.GetKeyDown( KeyCode.P ) )
 		{
 			if (Paused) {
 				Paused = false;
@@ -103,43 +116,48 @@ public class GameEngine : MonoBehaviour
 			}
 		}
 
-        if (Input.GetKeyDown(KeyCode.Z))
+        if (Input.GetKeyDown(KeyCode.Q))
         {
             SpawnSingle(-4);
         }
-        if (Input.GetKeyDown(KeyCode.X))
+        if (Input.GetKeyDown(KeyCode.W))
         {
             SpawnSingle(-3);
         }
-        if (Input.GetKeyDown(KeyCode.C))
+        if (Input.GetKeyDown(KeyCode.E))
         {
             SpawnSingle(-2);
         }
-        if (Input.GetKeyDown(KeyCode.V))
+        if (Input.GetKeyDown(KeyCode.R))
         {
             SpawnSingle(-1);
         }
-        if (Input.GetKeyDown(KeyCode.B))
+        if (Input.GetKeyDown(KeyCode.T))
         {
             SpawnSingle(0);
         }
-        if (Input.GetKeyDown(KeyCode.N))
+        if (Input.GetKeyDown(KeyCode.Y))
         {
             SpawnSingle(1);
         }
-        if (Input.GetKeyDown(KeyCode.M))
+        if (Input.GetKeyDown(KeyCode.U))
         {
             SpawnSingle(2);
         }
-        if (Input.GetKeyDown(KeyCode.Comma))
+        if (Input.GetKeyDown(KeyCode.I))
         {
             SpawnSingle(3);
         }
-        if (Input.GetKeyDown(KeyCode.Period))
+        if (Input.GetKeyDown(KeyCode.O))
         {
             SpawnSingle(4);
         }
-        if (Input.GetKeyDown(KeyCode.Q))
+
+        if (Input.GetKeyDown(KeyCode.N))
+        {
+            SceneManager.LoadScene("GameScene", LoadSceneMode.Single);
+        }
+        if (Input.GetKeyDown(KeyCode.C))
         {
             Singleton.data.cc += 1000;
         }
@@ -166,7 +184,7 @@ public class GameEngine : MonoBehaviour
                 SpawnPrize(Random.Range( 1, 10 ));
             }
 		}
-		else// if(playing)
+		else if( !Paused )
 		{
 			StepTime += Time.deltaTime;
 		}
