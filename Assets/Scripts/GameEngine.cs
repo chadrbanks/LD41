@@ -12,6 +12,7 @@ public class GameEngine : MonoBehaviour
     int Prize = 20;
 	public FloatText ft;
     public TextMesh cointxt;//got, next, CashText, CostText, CostText2;
+    public GameObject btn;
 
 	//public AudioSource failure, mainsong;
 
@@ -55,9 +56,17 @@ public class GameEngine : MonoBehaviour
 
     void SpawnSetup(int x, int y, int z)
     {
-        Vector3 nv = new Vector3(x,y,z);
+        Vector3 nv = new Vector3(x, y, z);
         Coin b = Instantiate(c, nv, Quaternion.identity) as Coin;
         b.Link(this);
+    }
+
+    void SpawnRand(int x, int y, int z, int t)
+    {
+        Vector3 nv = new Vector3(x, y, z);
+        Coin b = Instantiate(c, nv, Quaternion.identity) as Coin;
+        b.Link(this);
+        b.SetCoin(t);
     }
 
     void SpawnPrize(int type)
@@ -77,7 +86,7 @@ public class GameEngine : MonoBehaviour
         b.Link(this);
         b.SetPrize();
     }
-
+    //
     void SpawnSingle(int x)
     {
         if (!Paused)
@@ -87,6 +96,7 @@ public class GameEngine : MonoBehaviour
                 Vector3 nv = new Vector3(x, 6, 8);
                 Coin b = Instantiate(c, nv, Quaternion.identity) as Coin;
                 b.Link(this);
+                b.SetCoin(3);
                 Singleton.data.cc--;
             }
             else
@@ -101,11 +111,11 @@ public class GameEngine : MonoBehaviour
 
 	public bool Paused = false, Added = false;
     float StepTime = 0, MoveSpeed = 1.5f;
-    //int Steps = 0;
+    int Broke = 0;
 
 	void Update ()
 	{
-		if( Input.GetKeyDown( KeyCode.P ) )
+        if( Input.GetKeyDown( KeyCode.P ) )
 		{
 			if (Paused) {
 				Paused = false;
@@ -162,16 +172,43 @@ public class GameEngine : MonoBehaviour
             Singleton.data.cc += 1000;
         }
 
+        if (Broke >= 10)
+            btn.transform.position = new Vector3(13, 2, 5);
+        else
+            btn.transform.position = new Vector3(13, 2000, 5);
+        
 		if (StepTime >= MoveSpeed)
 		{
-            if( !Added )
+            if (Singleton.data.cc < 1)
             {
-                Added = true;
-                Singleton.data.cc++;
+                Broke++;
             }
             else
             {
-                Added = false;
+                Broke = 0;
+            }
+
+            if( Random.Range( 0, 7 ) == 0 )
+            {
+                //Added = true;
+                //Singleton.data.cc++;
+                int t, r = Random.Range(0, 100);
+
+                if (r < 50)
+                    t = 3;
+                else if (r < 75)
+                    t = 2;
+                else if (r < 90)
+                    t = 1;
+                else
+                    t = 0;
+
+                SpawnRand( Random.Range(-4, 5), 5, 8, t );
+
+                Vector3 v = new Vector3(-8, 0, 0);
+                FloatText g = Instantiate(ft, v, Quaternion.identity) as FloatText;
+                g.SetText("Bonus Coin!");
+                g.SetColor(Color.green);
             }
 
 			StepTime = 0;
@@ -182,6 +219,11 @@ public class GameEngine : MonoBehaviour
             if( Prize <= 0 )
             {
                 SpawnPrize(Random.Range( 1, 10 ));
+
+                Vector3 v = new Vector3(-8, 0, 0);
+                FloatText g = Instantiate(ft, v, Quaternion.identity) as FloatText;
+                g.SetText("10x Bonus Coin!");
+                g.SetColor(Color.green);
             }
 		}
 		else if( !Paused )

@@ -122,5 +122,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mats:
-  - {fileID: 2100000, guid: 9614a5ac856aa4a2abe365b316154371, type: 2}
-  - {fileID: 2100000, guid: 64a6d362bc39648b39717c18e91dfbce, type: 2}
+  - {fileID: 2100000, guid: 407f2158653964745b5f05a0efd822dc, type: 2}
+  - {fileID: 2100000, guid: c5efd18abc69e4e50b313e2184c4c3d1, type: 2}
+  - {fileID: 2100000, guid: 843093fb7a162472abb9633945376961, type: 2}
+  - {fileID: 2100000, guid: f177e58ca8c7642cab7c7a2d394b3905, type: 2}

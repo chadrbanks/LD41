@@ -4,15 +4,23 @@ using UnityEngine;
 
 public class Coin : MonoBehaviour
 {
-    int v = 10;
+    int t, v = 10;
     private bool setsy = false;
     //private MainEngine mainEngine;
     private GameEngine gameEngine;
     public Material[] mats;
 
-	void Start()
-	{
-        GetComponent<Renderer>().material = mats[ Random.Range( 0, 2 ) ];
+    void Awake()
+    {
+        t = Random.Range(0, 4);
+        SetCoin(t);
+        //v = 10;
+    }
+
+    void Start()
+    {
+       // t = Random.Range(0, 4);
+        //SetCoin(t);
         //v = 10;
     }
 
@@ -21,9 +29,24 @@ public class Coin : MonoBehaviour
         //transform.localScale += new Vector3(3F, 0, 2F);
     }
 
+    public void SetCoin( int i )
+    {
+        t = i;
+        GetComponent<Renderer>().material = mats[i];
+
+        if (t == 3) // DOGE
+            v = 1;
+        else if (t == 2) // LTC
+            v = 10;
+        else if (t == 1) // USDT
+            v = 20;
+        else
+            v = 30;
+    }
+
     public void SetPrize()
     {
-        v = 100;
+        v = v * 10;
         transform.localScale += new Vector3(2F, 0, 1.5F);
     }
 
